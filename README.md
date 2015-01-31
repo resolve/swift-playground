@@ -61,14 +61,14 @@ require 'swift/playground'
 
 playground = Swift::Playground.new
 
-documentation = Swift::Playground::Sections::Documentation.new <<-HTML
+documentation = Swift::Playground::DocumentationSection.new <<-HTML
 <h1>Welcome to the Playground!</h1>
 <p>
   This is an <em>awesome</em> example playground!
 </p>
 HTML
 
-code = Swift::Playground::Sections::Code.new <<-CODE
+code = Swift::Playground::CodeSection.new <<-CODE
 // Write swiftly!
 
 import UIKit
