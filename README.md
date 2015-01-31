@@ -80,11 +80,20 @@ playground.sections << documentation
 playground.sections << code
 
 playground.save('~/example.playground')
+```
 
 ### Generating a playground from markdown
 
 ```ruby
 require 'swift/playground/generator'
 
-
+playground = Swift::Playground::Generator.generate(markdown_file)
 ```
+
+## Credits
+
+Initial development by [Mark Haylock](https://github.com/mhaylock).
+
+This work was originally inspired by the work of [Jason Sandmeyer](https://github.com/jas) (created [Playground](https://github.com/jas/playground) using Node.js) and [Sam Soffes](https://github.com/soffes) (created [Playground](https://github.com/soffes/playground) using Ruby) - thank you to you both!
+
+Thank you to [Amanda Wagener](https://github.com/awagener) for some pair programming assistance at [Rails Camp NZ 5](http://railscamps.com).
