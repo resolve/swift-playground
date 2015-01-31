@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+require 'swift/playground'
+require 'swift/playground/cli'
+
+exit Swift::Playground::CLI.run(ARGV)
