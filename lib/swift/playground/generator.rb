@@ -14,10 +14,10 @@ module Swift
             case section[:role]
             when 'documentation'
               html = section.inner_html
-              playground.sections << DocumentationSection.new(html)
+              playground.sections << Sections::Documentation.new(html)
             when 'code'
               code = section.xpath('./pre/code').inner_html
-              playground.sections << CodeSection.new(code)
+              playground.sections << Sections::Code.new(code)
             end
           end
 

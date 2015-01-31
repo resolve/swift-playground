@@ -35,7 +35,7 @@ module Swift::Playground::CLI
               OSX
             end
 
-            playground.sections << Swift::Playground::CodeSection.new(contents)
+            playground.sections << Swift::Playground::Sections::Code.new(contents)
 
             playground.save(playground_file)
 

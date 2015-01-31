@@ -1,7 +1,9 @@
 module Swift
   class Playground
-    autoload :DocumentationSection, 'swift/playground/documentation_section'
-    autoload :CodeSection,          'swift/playground/code_section'
+    module Sections
+      autoload :Documentation, 'swift/playground/sections/documentation'
+      autoload :Code,          'swift/playground/sections/code'
+    end
 
     class Section
       class TemplateContext
