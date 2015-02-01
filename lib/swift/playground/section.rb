@@ -30,6 +30,10 @@ module Swift
           @playground.stylesheets
         end
 
+        def javascripts
+          @playground.javascripts
+        end
+
         def method_missing(method, *args)
           super unless @section.respond_to?(method)
           @section.send(method, *args)

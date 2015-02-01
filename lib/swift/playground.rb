@@ -99,6 +99,7 @@ module Swift
       # files being re-loaded by Xcode:
       temp_path = Pathname.new(Dir.mktmpdir)
       write_stylesheets(temp_path)
+      write_javascripts(temp_path)
       write_sections(temp_path)
       write_xcplayground(temp_path)
 
@@ -144,6 +145,15 @@ module Swift
       stylesheets.each_with_index do |stylesheet, index|
         number = index + 1
         stylesheet.save(stylesheets_path, number)
+      end
+    end
+
+    def write_javascripts(temp_path)
+      javascripts_path = temp_path.join('Documentation')
+
+      javascripts.each_with_index do |javascript, index|
+        number = index + 1
+        javascript.save(javascripts_path, number)
       end
     end
 

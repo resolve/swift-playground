@@ -2,6 +2,7 @@ module Swift
   class Playground
     assets_path = Pathname.new('swift/playground/assets')
     autoload :Stylesheet, assets_path.join('stylesheet')
+    autoload :Javascript, assets_path.join('javascript')
 
     class Asset
       include Util::PathOrContent

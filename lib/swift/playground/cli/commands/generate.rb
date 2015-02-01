@@ -62,11 +62,22 @@ module Swift::Playground::CLI
               stylesheet_path = Pathname.new(options['stylesheet']).expand_path
 
               unless stylesheet_path.exist?
-                raise "Stylesheet does not exist: '#{stylesheet_path}'."
+                raise "Stylesheet file does not exist: '#{stylesheet_path}'."
               end
 
               stylesheet = Swift::Playground::Stylesheet.new(stylesheet_path)
               playground.stylesheets << stylesheet
+            end
+
+            if options['javascript']
+              javascript_path = Pathname.new(options['javascript']).expand_path
+
+              unless javascript_path.exist?
+                raise "Javascript file does not exist: '#{javascript_path}'."
+              end
+
+              javascript = Swift::Playground::Javascript.new(javascript_path)
+              playground.javascripts << javascript
             end
 
             playground.save(playground_file)

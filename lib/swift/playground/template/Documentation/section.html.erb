@@ -6,6 +6,9 @@
     <% stylesheets.each_with_index do |stylesheet, index| %>
       <link rel="stylesheet" type="text/css" href="<%= stylesheet.filename(index + 1) %>">
     <% end %>
+    <% javascripts.each_with_index do |javascript, index| %>
+      <script src="<%= javascript.filename(index + 1) %>"></script>
+    <% end %>
     <meta id="xcode-display" name="xcode-display" content="render">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width,maximum-scale=1.0">
