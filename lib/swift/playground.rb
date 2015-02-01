@@ -73,6 +73,8 @@ module Swift
     end
 
     def save(destination_path)
+      validate!
+
       destination_path = Pathname.new(destination_path).expand_path
 
       # Create playground in a temporary directory before moving in place of
@@ -86,10 +88,16 @@ module Swift
       FileUtils.rm_rf(destination_path) if destination_path.exist?
       FileUtils.mv(temp_path, destination_path)
     ensure
-      FileUtils.remove_entry_secure(temp_path) if temp_path.exist?
+      FileUtils.remove_entry_secure(temp_path) if temp_path && temp_path.exist?
     end
 
     private
+
+    def validate!
+      unless sections.detect { |section| section.is_a?(CodeSection) }
+        raise "A playground must have at least one code section."
+      end
+    end
 
     def write_stylesheet(temp_path)
       stylesheet_path = temp_path.join('Documentation', 'defaults.css')
