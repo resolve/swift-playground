@@ -58,6 +58,17 @@ module Swift::Playground::CLI
               playground.syntax_highlighting = false
             end
 
+            if options['stylesheet']
+              stylesheet_path = Pathname.new(options['stylesheet']).expand_path
+
+              unless stylesheet_path.exist?
+                raise "Stylesheet does not exist: '#{stylesheet_path}'."
+              end
+
+              stylesheet = Swift::Playground::Stylesheet.new(stylesheet_path)
+              playground.stylesheets << stylesheet
+            end
+
             playground.save(playground_file)
 
             UI.say "Created playground at #{playground_file}"
