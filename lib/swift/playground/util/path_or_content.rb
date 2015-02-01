@@ -10,7 +10,7 @@ module Swift::Playground::Util
         raise "You must provide either a String or an IO object when constructing a #{self.class.name}."
       end
 
-      if path_or_content !~ /[^\n]/
+      if path_or_content !~ /[^\n]/ && !path_or_content.blank?
         path = Pathname.new(path_or_content).expand_path
         return path if path.exist?
 

@@ -12,9 +12,10 @@ module Swift
       class TemplateContext
         attr_accessor :number
 
-        def initialize(section, number)
+        def initialize(section, number, playground)
           @section = section
           @number = number
+          @playground = playground
         end
 
         def context
@@ -23,6 +24,10 @@ module Swift
 
         def filename
           @section.filename(@number)
+        end
+
+        def stylesheets
+          @playground.stylesheets
         end
 
         def method_missing(method, *args)
@@ -92,8 +97,8 @@ module Swift
         node
       end
 
-      def render(number)
-        context = TemplateContext.new(self, number).context
+      def render(number, playground)
+        context = TemplateContext.new(self, number, playground).context
         template.result(context)
       end
 

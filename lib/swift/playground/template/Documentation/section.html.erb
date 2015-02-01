@@ -3,7 +3,9 @@
   <head>
     <meta charset="utf-8">
     <title>Section <%= number %></title>
-    <link rel="stylesheet" type="text/css" href="defaults.css">
+    <% stylesheets.each_with_index do |stylesheet, index| %>
+      <link rel="stylesheet" type="text/css" href="<%= stylesheet.filename(index + 1) %>">
+    <% end %>
     <meta id="xcode-display" name="xcode-display" content="render">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width,maximum-scale=1.0">

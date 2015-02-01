@@ -14,7 +14,7 @@ module Swift::Playground::Util
       whitelist[:attributes]['section'] = ['role']
     end
 
-    MarkdownFilters = [
+    MarkdownFilterChain = [
       HTML::Pipeline::MarkdownFilter,
 
       # Filter for splitting out resulting HTML into separate HTML and swift
@@ -33,12 +33,12 @@ module Swift::Playground::Util
 
     attr_accessor :filters
 
-    def initialize(filters)
+    def initialize(filters = [])
       self.filters = filters
     end
 
-    def filters=(filters)
-      @filters = filters.compact
+    def has_filters?
+      self.filters.any?
     end
 
     def call(html, context = {}, result = nil)
@@ -47,7 +47,7 @@ module Swift::Playground::Util
         whitelist: HTMLWhitelist # Control HTML elements that are sanitized
       }.merge(context)
 
-      HTML::Pipeline.new(filters, context).call(html, context, result)
+      HTML::Pipeline.new(filters.compact, context).call(html, context, result)
     end
   end
 end

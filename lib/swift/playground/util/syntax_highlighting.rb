@@ -10,7 +10,7 @@ module Swift
             Gem::Specification::find_all_by_name('pygments.rb').any?
           end
 
-          def css(style='default')
+          def css(style = 'default')
             if available?
               Pygments.css('.highlight', style: style)
             else

@@ -4,13 +4,14 @@ require 'swift/playground/metadata'
 require 'swift/playground/debug'
 require 'swift/playground/generator'
 require 'swift/playground/section'
+require 'swift/playground/asset'
 
 module Swift
   class Playground
     class TemplateContext
       extend Forwardable
 
-      def_delegators :@playground, :sdk, :allows_reset?, :sections
+      def_delegators :@playground, :sdk, :allows_reset?, :sections, :stylesheets
 
       def initialize(playground)
         @playground = playground
@@ -21,15 +22,15 @@ module Swift
       end
     end
 
-    attr_accessor :platform, :allow_reset
-    attr_accessor :sections
+    attr_accessor :platform, :allow_reset, :convert_emoji, :syntax_highlighting
+    attr_accessor :sections, :stylesheets, :javascripts
 
     class << self
       protected
 
-      def template_path(filename)
+      def template_path(*filenames)
         template_root = Pathname.new('../playground/template').expand_path(__FILE__)
-        template_root.join(filename)
+        template_root.join(*filenames)
       end
 
       def xcplayground_template
@@ -43,14 +44,24 @@ module Swift
     end
 
     def initialize(options = {})
+      self.sections = []
+      self.stylesheets = []
+      self.javascripts = []
+
+      stylesheet_path = template_path 'Documentation', 'defaults.css'
+      self.stylesheets << Stylesheet.new(stylesheet_path)
+
       options = {
         platform: 'ios',
-        allow_reset: true
+        allow_reset: true,
+        convert_emoji: true,
+        syntax_highlighting: true
       }.merge(options)
 
-      self.sections = []
       self.platform = options[:platform]
       self.allow_reset = options[:allow_reset]
+      self.convert_emoji = options[:convert_emoji]
+      self.syntax_highlighting = options[:syntax_highlighting]
     end
 
     def platform=(platform)
@@ -72,8 +83,13 @@ module Swift
       allow_reset == true
     end
 
+    def convert_emoji?
+      convert_emoji == true
+    end
+
     def save(destination_path)
       validate!
+      insert_highlighting_stylesheet
 
       destination_path = Pathname.new(destination_path).expand_path
 
@@ -81,13 +97,14 @@ module Swift
       # any existing playground. This avoids any partially written playground
       # files being re-loaded by Xcode:
       temp_path = Pathname.new(Dir.mktmpdir)
-      write_stylesheet(temp_path)
+      write_stylesheets(temp_path)
       write_sections(temp_path)
       write_xcplayground(temp_path)
 
       FileUtils.rm_rf(destination_path) if destination_path.exist?
       FileUtils.mv(temp_path, destination_path)
     ensure
+      remove_highlighting_stylesheet
       FileUtils.remove_entry_secure(temp_path) if temp_path && temp_path.exist?
     end
 
@@ -99,22 +116,44 @@ module Swift
       end
     end
 
-    def write_stylesheet(temp_path)
-      stylesheet_path = temp_path.join('Documentation', 'defaults.css')
-      FileUtils.mkdir_p stylesheet_path.dirname
+    def insert_highlighting_stylesheet
+      if syntax_highlighting && Util::SyntaxHighlighting.available?
+        style = if syntax_highlighting == true
+          'default'
+        else
+          syntax_highlighting
+        end
 
-      stylesheet_template = template_path('Documentation/defaults.css')
-      FileUtils.cp stylesheet_template, stylesheet_path
+        @highlighting_css = Stylesheet.new(Util::SyntaxHighlighting.css(style),
+                                           filename: 'highlighting')
+        self.stylesheets.insert(0, @highlighting_css)
+      end
+    end
+
+    def remove_highlighting_stylesheet
+      if @highlighting_css
+        self.stylesheets.delete(@highlighting_css)
+        @highlighting_css = nil
+      end
+    end
+
+    def write_stylesheets(temp_path)
+      stylesheets_path = temp_path.join('Documentation')
+
+      stylesheets.each_with_index do |stylesheet, index|
+        number = index + 1
+        stylesheet.save(stylesheets_path, number)
+      end
     end
 
     def write_sections(temp_path)
       sections.each_with_index do |section, index|
         number = index + 1
         path = temp_path.join(section.path number)
-        FileUtils.mkdir_p path.dirname
 
+        FileUtils.mkdir_p path.dirname
         path.open('w') do |file|
-          file.write section.render(number)
+          file.write section.render(number, self)
         end
       end
     end
@@ -126,8 +165,8 @@ module Swift
       end
     end
 
-    def template_path(filename)
-      self.class.send(:template_path, filename)
+    def template_path(*filenames)
+      self.class.send(:template_path, *filenames)
     end
 
     def xcplayground_template
