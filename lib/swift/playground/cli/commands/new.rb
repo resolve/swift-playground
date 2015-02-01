@@ -36,10 +36,11 @@ module Swift::Playground::CLI
             end
 
             playground.sections << Swift::Playground::CodeSection.new(contents)
-
             playground.save(playground_file)
 
-            playground = Swift::Playground.new
+            if options['open']
+              system('open', playground_file.to_s)
+            end
           end
         end
       end

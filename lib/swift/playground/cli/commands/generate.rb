@@ -61,6 +61,10 @@ module Swift::Playground::CLI
             playground.save(playground_file)
 
             UI.say "Created playground at #{playground_file}"
+
+            if options['open']
+              system('open', playground_file.to_s)
+            end
           end
         end
       end
