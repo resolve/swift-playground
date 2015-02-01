@@ -11,7 +11,8 @@ module Swift
 
           playground = Playground.new
 
-          converted_markdown = Util::Pipeline.call(markdown_file.read)[:output]
+          pipeline = Util::Pipeline.new(Util::Pipeline::MarkdownFilters)
+          converted_markdown = pipeline.call(markdown_file.read)[:output]
           converted_markdown.xpath('./section').each do |section|
             case section[:role]
             when 'documentation'

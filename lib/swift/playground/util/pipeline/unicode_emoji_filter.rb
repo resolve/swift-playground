@@ -1,7 +1,7 @@
 require 'html/pipeline'
 
 module Swift::Playground::Util
-  module Pipeline
+  class Pipeline
     class UnicodeEmojiFilter < HTML::Pipeline::EmojiFilter
 
       def validate

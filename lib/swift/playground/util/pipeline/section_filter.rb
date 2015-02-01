@@ -1,7 +1,7 @@
 require 'html/pipeline'
 
 module Swift::Playground::Util
-  module Pipeline
+  class Pipeline
     class SectionFilter < HTML::Pipeline::Filter
 
       def call
