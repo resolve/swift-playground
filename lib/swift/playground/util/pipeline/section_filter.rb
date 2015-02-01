@@ -3,16 +3,15 @@ require 'html/pipeline'
 module Swift::Playground::Util
   class Pipeline
     class SectionFilter < HTML::Pipeline::Filter
-
       def call
         # Solution derived from http://stackoverflow.com/a/4799902
-        children = doc.children        # Every immediate child of the doc
-        doc.inner_html = ''            # Empty the doc now that we have our nodes
+        children = doc.children # Every immediate child of the doc
+        doc.inner_html = ''     # Empty the doc now that we have our nodes
 
-        # Comments preceding a swift code section can have meaning, so we need to track
-        # the last comment made:
+        # Comments preceding a swift code section can have meaning, so we need
+        # to track the last comment made:
         last_comment = nil
-        section = new_section(doc)     # Create our first container in the doc
+        section = new_section(doc) # Create our first container in the doc
         children.each do |node|
           if node.name == 'comment'
             last_comment = node.content.strip
@@ -29,7 +28,6 @@ module Swift::Playground::Util
 
             section = new_section(doc) # Create a new container for subsequent nodes
           else
-
             last_comment = nil unless node.name == 'text' && node.content.blank?
             section << node
           end
@@ -41,7 +39,7 @@ module Swift::Playground::Util
 
       private
 
-      def new_section(doc, attributes={})
+      def new_section(doc, attributes = {})
         attributes = {
           role: 'documentation'
         }.merge(attributes)
@@ -52,7 +50,6 @@ module Swift::Playground::Util
         end
         section
       end
-
     end
   end
 end
