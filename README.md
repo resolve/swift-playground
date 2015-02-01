@@ -13,8 +13,7 @@ $ gem install playground
 
 ### Creating an empty playground
 
-The playground created is the same as as Xcode would via "File > New >
-Playground…":
+The playground created is the same as as Xcode would via "File > New > Playground…":
 ```
 $ swift-playground new [options] example.playground
 ```
@@ -35,9 +34,7 @@ Reset Playground" in Xcode (default: enabled).
 $ swift-playground generate [options] example.md
 ```
 
-This command supports the following options (see `swift-playground help
-generate`) in addition to the options supported by the `new` command that are
-detailed above:
+This command supports the following options (see `swift-playground help generate`) in addition to the options supported by the `new` command that are detailed above:
 
 * __`--stylesheet=<file>`__
 <br /> CSS stylesheet for the HTML documentation sections of the playground. If one is not supplied then a default stylesheet will be used (default: none).
@@ -68,13 +65,13 @@ documentation = Swift::Playground::DocumentationSection.new <<-HTML
 </p>
 HTML
 
-code = Swift::Playground::CodeSection.new <<-CODE
+code = Swift::Playground::CodeSection.new <<-SWIFT
 // Write swiftly!
 
 import UIKit
 
 var str = "This string has contents."
-CODE
+SWIFT
 
 playground.sections << documentation
 playground.sections << code
@@ -88,6 +85,68 @@ playground.save('~/example.playground')
 require 'swift/playground/generator'
 
 playground = Swift::Playground::Generator.generate(markdown_file)
+```
+
+### Sections
+
+There are two section types you can use to construct a playground in Ruby:
+
+#### `DocumentationSection`
+
+These contain HTML that is rendered within the playground. You can construct a `DocumentationSection` with either a path to an HTML file or the raw HTML content itself (either as a String or an IO object):
+
+```ruby
+# All of the following are valid values for content:
+content = '/path/to/file.html'
+content = Pathname.new('/path/to/file.html')
+content = File.open('/path/to/file.html')
+content = <<-HTML
+  <h1>An example HTML fragment</h1>
+  <p>
+    Note this is a fragment, it does not have a root 'html' or 'body' tag.
+  </p>
+HTML
+
+# Creating the section:
+section = Swift::Playground::DocumentationSection.new(content)
+
+# Adding the section to a playground:
+playground.sections << section
+# or perhaps:
+playground.sections.insert(0, section)
+```
+
+The content you provide _must_ be an HTML fragment - if a `<html>` or `<body>` tag is present an exception will be raised.
+
+#### `CodeSection`
+
+These contain the executable swift code, and each playground must contain at least one of these sections. Constructing these sections is the same as `DocumentationSection` - you can use either a path to a swift file, or the raw swift code itself (either as a String or an IO object):
+
+```ruby
+# All of the following are valid values for content:
+content = '/path/to/file.swift'
+content = Pathname.new('/path/to/file.swift')
+content = File.open('/path/to/file.swift')
+content = <<-SWIFT
+  // Write swiftly!
+
+  import UIKit
+
+  var str = "This string has contents."
+SWIFT
+
+# Creating the section:
+section = Swift::Playground::CodeSection.new(content)
+
+# Set the 'style' of the section. Apple only document 'setup' at the moment
+# and this is all that is supported. 'setup' will wrap the section in
+# a "Setup" label that can be toggled (and initially appears minimized):
+section.style = 'setup'
+
+# Adding the section to a playground:
+playground.sections << section
+# or perhaps:
+playground.sections.insert(0, section)
 ```
 
 ## Credits
