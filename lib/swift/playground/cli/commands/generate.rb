@@ -48,8 +48,16 @@ module Swift::Playground::CLI
             end
 
             playground = Swift::Playground::Generator.generate(markdown_file)
-            playground.platform = options[:platform]
-            playground.allow_reset = options[:reset]
+            playground.platform = options['platform']
+            playground.allow_reset = options['reset']
+            playground.convert_emoji = options['emoji']
+
+            if options['highlighting']
+              playground.syntax_highlighting = options['highlighting-style']
+            else
+              playground.syntax_highlighting = false
+            end
+
             playground.save(playground_file)
 
             UI.say "Created playground at #{playground_file}"
