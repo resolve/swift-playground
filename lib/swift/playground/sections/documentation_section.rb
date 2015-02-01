@@ -1,5 +1,3 @@
-require 'erb'
-
 module Swift
   class Playground
     class DocumentationSection < Section
@@ -8,6 +6,11 @@ module Swift
 
       xcplayground node: 'documentation',
          path_attribute: 'relative-path'
+
+      def content=(content)
+        raise 'Please provide an HTML fragment only' if content =~ /(<html>|<body>)/
+        super(content)
+      end
     end
   end
 end

@@ -1,9 +1,14 @@
+require 'pathname'
+
 module Swift
   class Playground
-    autoload :DocumentationSection, 'swift/playground/documentation_section'
-    autoload :CodeSection,          'swift/playground/code_section'
+    sections_path = Pathname.new('swift/playground/sections')
+    autoload :DocumentationSection, sections_path.join('documentation_section')
+    autoload :CodeSection,          sections_path.join('code_section')
 
     class Section
+      include Util::PathOrContent
+
       class TemplateContext
         attr_accessor :number
 
@@ -43,7 +48,7 @@ module Swift
             if template_path.exist?
               template_contents = template_path.read
             else
-              template_contents = "<%= content %>"
+              template_contents = '<%= content %>'
             end
             @template = ERB.new(template_contents)
           end
@@ -68,7 +73,7 @@ module Swift
       end
 
       def initialize(content)
-        @content = content
+        self.content = path_or_content_as_io(content).read
       end
 
       def filename(number)

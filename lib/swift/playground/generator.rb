@@ -4,8 +4,10 @@ module Swift
   class Playground
     class Generator
       class << self
-        def generate(markdown_file)
-          markdown_file = Pathname.new(markdown_file)
+        include Util::PathOrContent
+
+        def generate(markdown, options={})
+          markdown_file = path_or_content_as_io(markdown)
 
           playground = Playground.new
 

@@ -1,5 +1,3 @@
-require 'erb'
-
 module Swift
   class Playground
     class CodeSection < Section
