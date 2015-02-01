@@ -19,7 +19,7 @@ module Swift
               html = section.inner_html
               playground.sections << DocumentationSection.new(html)
             when 'code'
-              code = section.xpath('./pre/code').inner_html
+              code = section.xpath('./pre/code').inner_text
               playground.sections << CodeSection.new(code)
             end
           end
