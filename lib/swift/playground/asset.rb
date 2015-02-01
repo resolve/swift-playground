@@ -21,12 +21,8 @@ module Swift
         pathname_or_content = path_or_content_as_io(content)
         self.content = pathname_or_content.read
 
-        filename = options[:filename]
-        if pathname_or_content.respond_to?(:basename) && !filename
-          filename = pathname_or_content.basename
-        end
-
-        @filename = filename.to_s || default_filename
+        filename = options[:filename] || derived_filename(pathname_or_content)
+        @filename = filename || default_filename
       end
 
       def filename(number)
@@ -49,6 +45,12 @@ module Swift
 
       def default_filename
         self.class.send(:default_filename)
+      end
+
+      def derived_filename(pathname_or_content)
+        if pathname_or_content.respond_to?(:basename)
+          pathname_or_content.basename.to_s
+        end
       end
     end
   end

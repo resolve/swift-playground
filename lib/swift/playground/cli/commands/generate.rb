@@ -24,6 +24,16 @@ module Swift::Playground::CLI
                    default_value: true,
                    desc: "Convert emoji aliases (e.g. ':+1:') into emoji characters"
 
+          c.switch :highlighting,
+                   default_value: true,
+                   desc: "Detect non-swift code blocks and add syntax highlighting. Only has an effect if 'github-linguist' and 'pygments.rb' gems are installed."
+
+          c.flag   :'highlighting-style',
+                   arg_name: '<style>',
+                   type: 'String',
+                   default_value: 'default',
+                   desc: "The name of a pygments (http://pygments.org/) style to apply to syntax highlighted code blocks. Set to 'custom' if providing your own pygments-compatible stylesheet. Ignored if --no-highlighting is set."
+
           c.flag   :resources,
                    arg_name: '<directory>',
                    type: String,

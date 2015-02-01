@@ -48,7 +48,7 @@ module Swift
       self.stylesheets = []
       self.javascripts = []
 
-      stylesheet_path = template_path 'Documentation', 'defaults.css'
+      stylesheet_path = template_path 'Documentation', 'defaults.css.scss'
       self.stylesheets << Stylesheet.new(stylesheet_path)
 
       options = {

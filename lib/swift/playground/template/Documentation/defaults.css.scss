@@ -1,0 +1,96 @@
+$playground_font_family:      "Helvetica Neue", Helvetica, sans-serif !default;
+$playground_font_size:        1.1rem !default;
+$playground_background_color: #fff !default;
+$playground_text_inset:       6px !default;
+
+$playground_section_separator_height: 1px !default;
+$playground_section_separator_color:  #e7e7e7 !default;
+
+$playground_gutter_width:                   28px !default;
+$playground_gutter_color:                   #fff !default;
+$playground_gutter_right_margin_inset:      8px !default;
+$playground_gutter_right_margin_line_width: 1px !default;
+$playground_gutter_right_margin_line_style: solid !default;
+$playground_gutter_right_margin_line_color: $playground_section_separator_color !default;
+
+// This font adjustment is so that 1rem of Menlo will appear the same size in
+// the HTML sections as it does in the editable swift code sections. For some
+// reason Xcode (6.1.1 - 6A2008a) adds 3 px to the font-size in HTML sections when
+// compared against the font-size used in those code sections. The 'calc' using
+// this adjustment variable compensates for this:
+$playground_font_adjustment:          3px    !default;
+// This separator buffer is needed to avoid the bottom border of a section being
+// reduced by half a pixel sometimes. Instead a transparent 0.5-1px buffer
+// appears below the border which in practice looks better:
+$playground_section_separator_buffer: 1px    !default;
+
+html {
+  /* Xcode (6.1.1 - 6A2008a) adds 3px to the font-size in HTML sections when
+     compared against the font-size used in the swift code sections. The
+     following 'calc' compensates for this, so 1 rem of Menlo in the HTML will
+     be the exact same size as code in the swift sections (using the default
+     Xcode themes that use the Menlo font): */
+  font-size: calc(1em - #{$playground_font_adjustment}) ;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  box-sizing: border-box;
+
+  font-family: $playground_font_family;
+  font-size: $playground_font_size;
+
+  @if $playground_section_separator_buffer > 0 {
+    border-bottom: $playground_section_separator_buffer solid transparent;
+  }
+
+  background: transparent;
+
+  > section {
+    box-sizing: border-box;
+
+    padding: 0 ($playground_gutter_width + $playground_text_inset);
+    background: $playground_background_color;
+    border: $playground_section_separator_height solid $playground_section_separator_color;
+    border-width: $playground_section_separator_height 0;
+
+    @media (max-height: ($playground_section_separator_height * 2) + 1) {
+      border-bottom: none;
+    }
+  }
+
+  > .gutter {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: $playground_section_separator_height;
+    bottom: $playground_section_separator_height;
+    width: $playground_gutter_width;
+    box-sizing: border-box;
+
+    background: $playground_gutter_color;
+
+    > .margin {
+      display: block;
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: $playground_gutter_right_margin_inset;
+      box-sizing: border-box;
+
+      border-left: $playground_gutter_right_margin_line_width
+                   $playground_gutter_right_margin_line_style
+                   $playground_gutter_right_margin_line_color;
+    }
+  }
+}
+
+code, pre {
+  font-family: Menlo, "Andale Mono", Monaco, monospace;
+  font-size: 1rem;
+}
