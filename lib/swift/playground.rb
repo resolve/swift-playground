@@ -1,4 +1,5 @@
 require 'fileutils'
+require 'tmpdir'
 
 require 'swift/playground/metadata'
 require 'swift/playground/debug'
