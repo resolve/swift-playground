@@ -15,4 +15,5 @@ group :development do
   gem 'pygments.rb', '~> 0.6.0'
 
   gem 'pry'
+  gem 'pry-byebug', '1.3.3'
 end
