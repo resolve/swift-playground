@@ -13,16 +13,16 @@ module Swift::Playground::CLI
           c.flag   :stylesheet,
                    arg_name: '<file>',
                    type: String,
-                   desc: 'CSS stylesheet for the HTML documentation sections of the playground. If one is not supplied then a default stylesheet will be used'
+                   desc: 'CSS stylesheet for the HTML documentation sections of the playground. This will be included after the default stylesheet.'
 
           c.flag   :javascript,
                    arg_name: '<file>',
                    type: String,
-                   desc: 'A javascript file for the HTML documentation sections of the playground. Each section is rendered independently of another and the script will not have access to the DOM from any other sections'
+                   desc: 'A javascript file for the HTML documentation sections of the playground. Each section is rendered independently of another and the script will not have access to the DOM from any other sections.'
 
           c.switch :emoji,
                    default_value: true,
-                   desc: "Convert emoji aliases (e.g. ':+1:') into emoji characters"
+                   desc: "Convert emoji aliases (e.g. ':+1:') into emoji characters."
 
           c.switch :highlighting,
                    default_value: true,
@@ -37,7 +37,7 @@ module Swift::Playground::CLI
           c.flag   :resources,
                    arg_name: '<directory>',
                    type: String,
-                   desc: 'A directory of resources to be bundled with the playground'
+                   desc: 'A directory of resources to be bundled with the playground.'
 
           c.action do |_, options, args|
             markdown_file = Pathname.new(args[0]).expand_path
