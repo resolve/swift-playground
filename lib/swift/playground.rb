@@ -11,15 +11,14 @@ module Swift
   class Playground
     class TemplateContext
       extend Forwardable
+      def_delegators :@playground, :sdk, :allows_reset?, :sections
 
-      def_delegators :@playground, :sdk, :allows_reset?, :sections, :stylesheets
+      def self.context(*args)
+        new(*args).instance_eval { binding }
+      end
 
       def initialize(playground)
         @playground = playground
-      end
-
-      def context
-        binding
       end
     end
 
@@ -171,7 +170,7 @@ module Swift
 
     def write_xcplayground(temp_path)
       temp_path.join('contents.xcplayground').open('w') do |file|
-        context = TemplateContext.new(self).context
+        context = TemplateContext.context(self)
         file.write xcplayground_template.result(context)
       end
     end

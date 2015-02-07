@@ -10,37 +10,23 @@ module Swift
       include Util::PathOrContent
 
       class TemplateContext
-        attr_accessor :number
+        attr_accessor :content, :number
 
-        def initialize(section, number, playground)
-          @section = section
-          @number = number
-          @playground = playground
+        extend Forwardable
+        def_delegators :@playground, :stylesheets, :javascripts
+
+        def self.context(*args)
+          new(*args).instance_eval { binding }
         end
 
         def context
           binding
         end
 
-        def filename
-          @section.filename(@number)
-        end
-
-        def stylesheets
-          @playground.stylesheets
-        end
-
-        def javascripts
-          @playground.javascripts
-        end
-
-        def method_missing(method, *args)
-          super unless @section.respond_to?(method)
-          @section.send(method, *args)
-        end
-
-        def respond_to?(method)
-          @section.respond_to?(method) || super
+        def initialize(content, number, playground)
+          @content = content
+          @number = number
+          @playground = playground
         end
       end
 
@@ -101,8 +87,10 @@ module Swift
         node
       end
 
-      def render(number, playground)
-        context = TemplateContext.new(self, number, playground).context
+      def render(number, playground, custom_content = nil)
+        context = TemplateContext.context custom_content || content,
+                                          number,
+                                          playground
         template.result(context)
       end
 
