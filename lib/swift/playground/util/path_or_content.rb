@@ -19,5 +19,13 @@ module Swift::Playground::Util
         StringIO.new(path_or_content)
       end
     end
+
+    def derived_filename(pathname_or_content)
+      if pathname_or_content.respond_to?(:basename)
+        pathname_or_content.basename.to_s
+      elsif pathname_or_content.respond_to?(:path)
+        File.basename(pathname_or_content.path)
+      end
+    end
   end
 end

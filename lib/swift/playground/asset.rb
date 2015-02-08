@@ -47,12 +47,6 @@ module Swift
       def default_filename
         self.class.send(:default_filename)
       end
-
-      def derived_filename(pathname_or_content)
-        if pathname_or_content.respond_to?(:basename)
-          pathname_or_content.basename.to_s
-        end
-      end
     end
   end
 end
