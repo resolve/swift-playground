@@ -15,9 +15,9 @@ $playground_gutter_right_margin_line_color: $playground_section_separator_color 
 
 // This font adjustment is so that 1rem of Menlo will appear the same size in
 // the HTML sections as it does in the editable swift code sections. For some
-// reason Xcode (6.1.1 - 6A2008a) adds 3 px to the font-size in HTML sections when
-// compared against the font-size used in those code sections. The 'calc' using
-// this adjustment variable compensates for this:
+// reason Xcode (6.1.1 - 6A2008a) adds 3 px to the font-size in HTML sections
+// when compared against the font-size used in those code sections. The 'calc'
+// using this adjustment variable compensates for this:
 $playground_font_adjustment:          3px    !default;
 // This separator buffer is needed to avoid the bottom border of a section being
 // reduced by half a pixel sometimes. Instead a transparent 0.5-1px buffer
@@ -25,11 +25,11 @@ $playground_font_adjustment:          3px    !default;
 $playground_section_separator_buffer: 1px    !default;
 
 html {
-  /* Xcode (6.1.1 - 6A2008a) adds 3px to the font-size in HTML sections when
-     compared against the font-size used in the swift code sections. The
-     following 'calc' compensates for this, so 1 rem of Menlo in the HTML will
-     be the exact same size as code in the swift sections (using the default
-     Xcode themes that use the Menlo font): */
+  // Xcode (6.1.1 - 6A2008a) adds 3px to the font-size in HTML sections when
+  // compared against the font-size used in the swift code sections. The
+  // following 'calc' compensates for this, so 1 rem of Menlo in the HTML will
+  // be the exact same size as code in the swift sections (using the default
+  // Xcode themes that use the Menlo font):
   font-size: calc(1em - #{$playground_font_adjustment}) ;
   margin: 0;
   padding: 0;
