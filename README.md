@@ -138,9 +138,11 @@ SWIFT
 # Creating the section:
 section = Swift::Playground::CodeSection.new(content)
 
-# Set the 'style' of the section. Apple only document 'setup' at the moment
-# and this is all that is supported. 'setup' will wrap the section in
-# a "Setup" label that can be toggled (and initially appears minimized):
+# Set the 'style' of the section. Apple only document 'setup' at the
+# moment and this is all that is supported.
+#
+# 'setup' will wrap the section in a "Setup" label that can be toggled
+# (and initially appears minimized):
 section.style = 'setup'
 
 # Adding the section to a playground:
