@@ -186,17 +186,17 @@ Generating a playground from Markdown supports the [Github Flavoured Markdown](h
 
 ## Default Stylesheet
 
-Each documentation section is generated with a [default stylesheet](lib/swift/playground/template/Documentation/defaults.css.scss) loaded before any custom stylesheet. This default stylesheet aims to provide an improved baseline over what is already provided by the webkit renderer used in the Playground.
+Each documentation section is generated with a [default stylesheet](lib/swift/playground/template/Documentation/defaults.css.scss) loaded before any custom stylesheet. This stylesheet aims to provide an improved baseline over what is already there from the webkit renderer's agent stylesheets.
 
-It does so in two very specific ways:
-  1. The default font size is adjusted so at `1rem` the default Xcode font "Menlo" will render at exactly the same size as it would in the swift code sections of the playground. This is true even if the user has changed the editor font size.
+It does so in some specific ways:
+  1. The default font size is adjusted so that at `1rem` the default Xcode font "Menlo" will render at exactly the same size as it would in the swift code sections of the playground. This is true even if the user has changed the editor font size.
   2. A "gutter" (`body > .gutter`) is added that renders a line where the editor gutter appears in Xcode when line numbers are disabled. When Line numbers are visible it will appear centered with the line numbers.
+  3. The main body of the section (`body > section`) has a left and right padding that aligns the text with the left hand margin of swift code sections.
+  4. Sets the default font of `<code>` and `<pre>` elements to "Menlo" which matches with the current default Xcode font.
 
-Both of these features of the default stylesheet rely on aspects of the Xcode interface the could change in future versions, so there are no guarantees that what looks best now will always looks best.
+_Warning: These features rely on aspects of the Xcode interface the could change in future versions: the width of the editor gutter and the default size of the font inside of HTML documentation sections. There are no guarantees that these will stay the same between Xcode versions._
 
-The stylesheet also sets the default font of `<code>` and `<pre>` elements to "Menlo" which matches with the current default Xcode font.
-
-If you wish to override any of this behavior, [take a look at the stylesheet](lib/swift/playground/template/Documentation/defaults.css.scss) (written in SCSS) to see what you will need to aim to override.
+_Be particularly cautious with adding color to the gutter, those colors may clash with the real gutter in the swift code sections - depending on the Theme being used by the user._
 
 ## Credits
 
