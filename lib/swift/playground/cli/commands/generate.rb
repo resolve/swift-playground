@@ -34,10 +34,10 @@ module Swift::Playground::CLI
                    default_value: 'default',
                    desc: "The name of a pygments (http://pygments.org/) style to apply to syntax highlighted code blocks. Set to 'custom' if providing your own pygments-compatible stylesheet. Ignored if --no-highlighting is set."
 
-          c.flag   :resources,
-                   arg_name: '<directory>',
-                   type: String,
-                   desc: 'A directory of resources to be bundled with the playground.'
+          # c.flag   :resources,
+          #          arg_name: '<directory>',
+          #          type: String,
+          #          desc: 'A directory of resources to be bundled with the playground.'
 
           c.action do |_, options, args|
             markdown_file = Pathname.new(args[0]).expand_path

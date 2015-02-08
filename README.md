@@ -40,8 +40,6 @@ This command supports the following options (see `swift-playground help generate
 <br /> CSS stylesheet for the HTML documentation sections of the playground. If one is not supplied then a default stylesheet will be used (default: none).
 * __`--javascript=<file>`__
 <br /> A javascript file for the HTML documentation sections of the playground. Each section is rendered independently of another and the script will not have access to the DOM from any other sections (default: none).
-* __`--resources=<directory>`__
-<br /> A directory of resources to be bundled with the playground (default: none).
 * __`--[no-]reset`__
 <br /> Allow the playground to be reset to it's original state via "Editor > Reset Playground" in Xcode (default: enabled).
 * __`--open`__
