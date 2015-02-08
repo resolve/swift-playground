@@ -2,6 +2,24 @@
 
 Create and modify Xcode Swift Playgrounds from Ruby. Includes both a Ruby API and a CLI.
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+## Contents
+
+- [Installation](#installation)
+- [CLI Usage](#cli-usage)
+  - [Creating an empty playground](#creating-an-empty-playground)
+  - [Generate a playground from markdown](#generate-a-playground-from-markdown)
+- [Ruby Usage](#ruby-usage)
+  - [Constructing a basic playground](#constructing-a-basic-playground)
+  - [Generating a playground from markdown](#generating-a-playground-from-markdown)
+  - [Sections](#sections)
+- [Markdown Format](#markdown-format)
+- [Default Stylesheet](#default-stylesheet)
+- [Credits](#credits)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## Installation
 
 Install via RubyGems:
