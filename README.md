@@ -118,7 +118,7 @@ playground.sections << section
 playground.sections.insert(0, section)
 ```
 
-The content you provide _must_ be an HTML fragment - if a `<html>` or `<body>` tag is present an exception will be raised.
+The content you provide _must_ be an HTML fragment - if a `<html>`, `<head>` or `<body>` tag is present an exception will be raised.
 
 #### `CodeSection`
 
@@ -152,6 +152,10 @@ playground.sections << section
 # or perhaps:
 playground.sections.insert(0, section)
 ```
+
+## Markdown Format
+
+Generating a playground from Markdown supports the [Github Flavoured Markdown](https://help.github.com/articles/github-flavored-markdown/) syntax.
 
 ## Credits
 
