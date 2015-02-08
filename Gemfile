@@ -11,7 +11,7 @@ group :development do
   #
   # pygments.rb can also be problematic on some platforms and also is used
   # only for syntax highlighting so can be optional also:
-  gem 'github-linguist', '~> 3.4.1'
+  gem 'github-linguist', '~> 4.3.1'
   gem 'pygments.rb', '~> 0.6.0'
 
   gem 'pry'
