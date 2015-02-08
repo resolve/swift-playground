@@ -151,7 +151,7 @@ playground.sections.insert(0, section)
 
 ## Credits
 
-Initial development by [Mark Haylock](https://github.com/mhaylock).
+Initial development by [Mark Haylock](https://github.com/mhaylock). Development sponsored by [Resolve Digital](http://resolve.digital).
 
 This work was originally inspired by the work of [Jason Sandmeyer](https://github.com/jas) (created [Playground](https://github.com/jas/playground) using Node.js) and [Sam Soffes](https://github.com/soffes) (created [Playground](https://github.com/soffes/playground) using Ruby) - thank you to you both!
 
