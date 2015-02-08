@@ -157,6 +157,20 @@ playground.sections.insert(0, section)
 
 Generating a playground from Markdown supports the [Github Flavoured Markdown](https://help.github.com/articles/github-flavored-markdown/) syntax.
 
+## Default Stylesheet
+
+Each documentation section is generated with a [default stylesheet](lib/swift/playground/template/Documentation/defaults.css.scss) loaded before any custom stylesheet. This default stylesheet aims to provide an improved baseline over what is already provided by the webkit renderer used in the Playground.
+
+It does so in two very specific ways:
+  1. The default font size is adjusted so at `1rem` the default Xcode font "Menlo" will render at exactly the same size as it would in the swift code sections of the playground. This is true even if the user has changed the editor font size.
+  2. A "gutter" (`body > .gutter`) is added that renders a line where the editor gutter appears in Xcode when line numbers are disabled. When Line numbers are visible it will appear centered with the line numbers.
+
+Both of these features of the default stylesheet rely on aspects of the Xcode interface the could change in future versions, so there are no guarantees that what looks best now will always looks best.
+
+The stylesheet also sets the default font of `<code>` and `<pre>` elements to "Menlo" which matches with the current default Xcode font.
+
+If you wish to override any of this behavior, [take a look at the stylesheet](lib/swift/playground/template/Documentation/defaults.css.scss) (written in SCSS) to see what you will need to aim to override.
+
 ## Credits
 
 Initial development by [Mark Haylock](https://github.com/mhaylock). Development sponsored by [Resolve Digital](http://resolve.digital).
