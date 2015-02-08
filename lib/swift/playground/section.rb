@@ -30,7 +30,7 @@ module Swift
         end
       end
 
-      attr_accessor :content
+      attr_reader :content
 
       class << self
         protected
@@ -68,7 +68,8 @@ module Swift
       end
 
       def initialize(content)
-        self.content = path_or_content_as_io(content).read
+        @content = path_or_content_as_io(content).read
+        @content.freeze
       end
 
       def filename(number)

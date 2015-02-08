@@ -7,9 +7,17 @@ module Swift
       xcplayground node: 'documentation',
          path_attribute: 'relative-path'
 
-      def content=(content)
-        raise 'Please provide an HTML fragment only' if content =~ /(<html>|<body>)/
+      attr_reader :assets
+
+      def initialize(content)
         super(content)
+
+        if @content =~ /(<html|<head|<body)[\s>]/
+          raise 'Please provide an HTML fragment only. ' +
+                'Do not include an <html>, <head> or <body> tag.'
+        end
+
+        extract_assets
       end
 
       def render(number, playground)
@@ -33,6 +41,21 @@ module Swift
           super(number, playground, processed[:output].inner_html)
         else
           super(number, playground)
+        end
+      end
+
+      private
+
+      def extract_assets
+        @assets = []
+
+        document = Nokogiri::HTML(@content)
+        document.search('//img[@src]').each do |img|
+          image_path = Pathname.new(img['src'])
+
+          if image_path.relative?
+            @assets << Asset.new(img['src'])
+          end
         end
       end
     end
