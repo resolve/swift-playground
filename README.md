@@ -37,7 +37,7 @@ $ swift-playground generate [options] example.md
 This command supports the following options (see `swift-playground help generate`) in addition to the options supported by the `new` command that are detailed above:
 
 * __`--stylesheet=<file>`__
-<br /> CSS stylesheet for the HTML documentation sections of the playground. If one is not supplied then a default stylesheet will be used (default: none).
+<br /> CSS stylesheet for the HTML documentation sections of the playground. [SASS/SCSS syntax](http://sass-lang.com) is supported. This will be included after the default stylesheet. (default: none).
 * __`--javascript=<file>`__
 <br /> A javascript file for the HTML documentation sections of the playground. Each section is rendered independently of another and the script will not have access to the DOM from any other sections (default: none).
 * __`--[no-]reset`__
@@ -45,7 +45,11 @@ This command supports the following options (see `swift-playground help generate
 * __`--open`__
 <br /> Open the playground in Xcode once it has been created.
 * __`--[no-]emoji`__
-<br /> Convert emoji aliases (e.g. ':+1:') into emoji characters (default: enabled).
+<br /> Convert emoji aliases (e.g. `:+1:`) into emoji characters (default: enabled).
+* __`--[no-]highlighting`__
+<br /> Detect non-swift code blocks and add syntax highlighting. Only has an effect if '[github-linguist](https://github.com/github/linguist)' and '[pygments.rb](https://github.com/tmm1/pygments.rb)' gems are installed. (default: enabled).
+* __`--highlighting-style=<style>`__
+<br /> The name of a pygments (http://pygments.org/) style to apply to syntax highlighted code blocks. Set to 'custom' if providing your own pygments-compatible stylesheet. Ignored if `--no-highlighting` is set. (default: default).
 
 ## Ruby Usage
 

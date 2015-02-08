@@ -13,7 +13,7 @@ module Swift::Playground::CLI
           c.flag   :stylesheet,
                    arg_name: '<file>',
                    type: String,
-                   desc: 'CSS stylesheet for the HTML documentation sections of the playground. This will be included after the default stylesheet.'
+                   desc: 'CSS stylesheet for the HTML documentation sections of the playground. SASS/SCSS syntax is supported. This will be included after the default stylesheet.'
 
           c.flag   :javascript,
                    arg_name: '<file>',
@@ -22,7 +22,7 @@ module Swift::Playground::CLI
 
           c.switch :emoji,
                    default_value: true,
-                   desc: "Convert emoji aliases (e.g. ':+1:') into emoji characters."
+                   desc: "Convert emoji aliases (e.g. `:+1:`) into emoji characters."
 
           c.switch :highlighting,
                    default_value: true,
