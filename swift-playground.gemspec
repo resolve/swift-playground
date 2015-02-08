@@ -16,10 +16,10 @@ spec = Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 1.9.3'
 
-  s.add_runtime_dependency 'html-pipeline', '~> 1.11.0'
-  s.add_runtime_dependency 'activesupport', '~> 4.1.6'
+  s.add_runtime_dependency 'html-pipeline', '~> 1.11'
+  s.add_runtime_dependency 'activesupport', '~> 4.0'
   s.add_runtime_dependency 'github-markdown', '~> 0.6.7'
-  s.add_runtime_dependency 'sanitize', '~> 3.0.3'
+  s.add_runtime_dependency 'sanitize', '~> 3.0'
   s.add_runtime_dependency 'gemoji', '~> 2.1.0'
   s.add_runtime_dependency 'gli', '~> 2.12.2'
   s.add_runtime_dependency 'paint', '~> 0.9.0'
