@@ -125,9 +125,11 @@ module Swift
           syntax_highlighting
         end
 
-        @highlighting_css = Stylesheet.new(Util::SyntaxHighlighting.css(style),
-                                           filename: 'highlighting')
-        self.stylesheets.insert(0, @highlighting_css)
+        unless style == 'custom'
+          @highlighting_css = Stylesheet.new(Util::SyntaxHighlighting.css(style),
+                                             filename: 'highlighting')
+          self.stylesheets.insert(0, @highlighting_css)
+        end
       end
     end
 
