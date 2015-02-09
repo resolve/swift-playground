@@ -80,6 +80,8 @@ This command supports the following options (see `swift-playground help generate
 
 ## Ruby Usage
 
+_WARNING: This is still under development and the API may change before 1.0 is released._
+
 ### Constructing a basic playground
 
 ```ruby
