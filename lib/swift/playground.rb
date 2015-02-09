@@ -88,10 +88,11 @@ module Swift
     end
 
     def save(destination_path)
-      validate!
-      insert_highlighting_stylesheet
-
       destination_path = Pathname.new(destination_path).expand_path
+
+      validate! destination_path
+
+      insert_highlighting_stylesheet
 
       # Create playground in a temporary directory before moving in place of
       # any existing playground. This avoids any partially written playground
@@ -111,9 +112,13 @@ module Swift
 
     private
 
-    def validate!
+    def validate!(destination_path)
+      unless destination_path.extname == '.playground'
+        raise "Destination path '#{destination_path} does not end in .playground."
+      end
+
       unless sections.detect { |section| section.is_a?(CodeSection) }
-        raise "A playground must have at least one code section."
+        raise 'A playground must have at least one code section.'
       end
     end
 
