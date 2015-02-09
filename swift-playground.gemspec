@@ -25,5 +25,5 @@ spec = Gem::Specification.new do |s|
   s.add_runtime_dependency 'gli', '~> 2.12.2'
   s.add_runtime_dependency 'paint', '~> 0.9.0'
   s.add_runtime_dependency 'highline', '~> 1.6.21'
-  s.add_runtime_dependency 'sass', '~> 3.4.10'
+  s.add_runtime_dependency 'sass', '~> 3.2'
 end
