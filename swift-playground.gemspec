@@ -5,7 +5,7 @@ spec = Gem::Specification.new do |s|
   s.version       = Swift::Playground::VERSION
   s.authors       = ['Mark Haylock']
   s.email         = ['mark@resolvedigital.co.nz']
-  s.homepage      = ''
+  s.homepage      = 'https://github.com/resolve/swift-playground'
   s.license       = 'MIT'
   s.summary       = Swift::Playground::SUMMARY
   s.description   = Swift::Playground::DESCRIPTION
@@ -15,7 +15,7 @@ spec = Gem::Specification.new do |s|
   s.test_files    = s.files.grep(%r{^(test|spec|features)/})
   s.require_paths = ['lib']
 
-  s.required_ruby_version = '>= 1.9.3'
+  s.required_ruby_version = '>= 2.0.0'
 
   s.add_runtime_dependency 'html-pipeline', '~> 1.11'
   s.add_runtime_dependency 'activesupport', '~> 4.0'
