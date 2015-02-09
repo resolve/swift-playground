@@ -1,4 +1,4 @@
-Copyright (c) 2014 Resolve Digital and Mark Haylock
+Copyright (c) 2014-2015 [Resolve Digital](http://resolve.digital) and Mark Haylock
 
 MIT License
 
