@@ -7,6 +7,6 @@ module Swift
                   'Playgrounds. Supports generation from markdown files '  \
                   'with the intent to aide in the production of polished ' \
                   'playground documents.'
-    VERSION = '0.0.1'
+    VERSION = '0.0.2'
   end
 end
