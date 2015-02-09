@@ -8,6 +8,7 @@ spec = Gem::Specification.new do |s|
   s.homepage      = ''
   s.license       = 'MIT'
   s.summary       = Swift::Playground::SUMMARY
+  s.description   = Swift::Playground::DESCRIPTION
 
   s.files         = `git ls-files -z`.split("\x0")
   s.executables   = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
