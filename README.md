@@ -24,7 +24,7 @@ Create and modify Xcode Swift Playgrounds from Ruby. Includes both a Ruby API an
 
 Install via RubyGems:
 ```
-$ gem install playground
+$ gem install swift-playground
 ```
 
 ## CLI Usage
