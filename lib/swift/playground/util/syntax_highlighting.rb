@@ -1,4 +1,8 @@
-require 'pygments'
+begin
+  require 'pygments'
+rescue LoadError
+  # Ignore a failure to load the pygments gem
+end
 
 module Swift
   class Playground
