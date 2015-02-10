@@ -61,12 +61,6 @@ This command supports the following options (see `swift-playground help generate
     CSS stylesheet for the HTML documentation sections of the playground. [SASS/SCSS syntax](http://sass-lang.com) is supported. This will be included after the default stylesheet. (default: none).
 * __`--javascript=<file>`__
 
-    A javascript file for the HTML documentation sections of the playground. Each section is rendered independently of another and the script will not have access to the DOM from any other sections (default: none).
-* __`--[no-]reset`__
-
-    Allow the playground to be reset to it's original state via "Editor > Reset Playground" in Xcode (default: enabled).
-* __`--open`__
-
     Open the playground in Xcode once it has been created.
 * __`--[no-]emoji`__
 
