@@ -7,7 +7,7 @@ module Swift
     autoload :CodeSection,          sections_path.join('code_section')
 
     class Section
-      include Util::PathOrContent
+      include Util::SourceIO
 
       class TemplateContext
         attr_accessor :content, :number
@@ -68,7 +68,7 @@ module Swift
       end
 
       def initialize(content)
-        @content = path_or_content_as_io(content).read
+        @content = source_as_io(content).read
         @content.freeze
       end
 

@@ -118,11 +118,10 @@ There are two section types you can use to construct a playground in Ruby:
 
 #### `DocumentationSection`
 
-These contain HTML that is rendered within the playground. You can construct a `DocumentationSection` with either a path to an HTML file or the raw HTML content itself (either as a String or an IO object):
+These contain HTML that is rendered within the playground. You can construct a `DocumentationSection` with either an IO object or a string representing the contents of the HTML file:
 
 ```ruby
 # All of the following are valid values for content:
-content = '/path/to/file.html'
 content = Pathname.new('/path/to/file.html')
 content = File.open('/path/to/file.html')
 content = <<-HTML
@@ -145,11 +144,10 @@ The content you provide _must_ be an HTML fragment - if a `<html>`, `<head>` or 
 
 #### `CodeSection`
 
-These contain the executable swift code, and each playground must contain at least one of these sections. Constructing these sections is the same as `DocumentationSection` - you can use either a path to a swift file, or the raw swift code itself (either as a String or an IO object):
+These contain the executable swift code, and each playground must contain at least one of these sections. Constructing these sections is the same as `DocumentationSection` - you can use either an IO object or a string representing the contents of the swift file:
 
 ```ruby
 # All of the following are valid values for content:
-content = '/path/to/file.swift'
 content = Pathname.new('/path/to/file.swift')
 content = File.open('/path/to/file.swift')
 content = <<-SWIFT

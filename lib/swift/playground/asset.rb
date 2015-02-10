@@ -5,7 +5,7 @@ module Swift
     autoload :Javascript, assets_path.join('javascript')
 
     class Asset
-      include Util::PathOrContent
+      include Util::SourceIO
 
       class << self
         protected
@@ -19,7 +19,7 @@ module Swift
       attr_accessor :content
 
       def initialize(content, options = {})
-        pathname_or_content = path_or_content_as_io(content)
+        pathname_or_content = source_as_io(content)
         self.content = pathname_or_content.read
 
         filename = options[:filename] || derived_filename(pathname_or_content)
