@@ -18,7 +18,7 @@ module Swift
 
       def derived_filename(pathname_or_content)
         filename = super(pathname_or_content)
-        filename.gsub(/\.scss$/, '')
+        filename.gsub(/\.scss$/, '') if filename
       end
 
       private
