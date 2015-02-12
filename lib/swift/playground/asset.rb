@@ -16,7 +16,7 @@ module Swift
         end
       end
 
-      attr_accessor :content
+      attr_accessor :content, :filename
 
       def initialize(content, options = {})
         pathname_or_content = source_as_io(content)
