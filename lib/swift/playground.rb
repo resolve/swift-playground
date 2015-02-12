@@ -132,7 +132,7 @@ module Swift
 
         unless style == 'custom'
           @highlighting_css = Stylesheet.new(Util::SyntaxHighlighting.css(style),
-                                             filename: 'highlighting')
+                                             filename: 'highlighting.css')
           self.stylesheets.insert(0, @highlighting_css)
         end
       end
